@@ -12,7 +12,7 @@
       />
       <LineChart
         v-if="activeTab === 1"
-        :options="rangeChartOptions"
+        :options="projectionChartOptions"
         :data="dataNetWorthFuture"
       />
     </div>
@@ -51,7 +51,7 @@
 <script>
 import { get } from "vuex-pathify";
 import { Bar, Line as LineChart } from "vue-chartjs";
-import { chartOptions, rangeChartOptions } from "@/constants/chartOptions";
+import { chartOptions, projectionChartOptions } from "@/constants/chartOptions";
 
 export default {
   name: "NetWorth",
@@ -61,7 +61,7 @@ export default {
     return {
       activeTab: 1,
       chartOptions,
-      rangeChartOptions,
+      projectionChartOptions,
     };
   },
   computed: {

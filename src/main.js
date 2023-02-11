@@ -37,8 +37,24 @@ ChartJS.register(
 
 Vue.config.productionTip = false;
 
-Vue.filter("currency", valueToDollarsFormatted);
-Vue.filter("currencyShort", valueToDollarsAbbreviated);
+// Vue.directive("dark-class", {
+//   bind: function (element, binding) {
+//     const classes = binding.value.split(" ");
+//     const query = window.matchMedia("(prefers-color-scheme: dark)");
+//     const isDarkMode = query.matches;
+//     element.classList.remove(...classes);
+//     if (isDarkMode) {
+//       element.classList.add(...classes);
+//     }
+//   },
+// });
+
+Vue.filter("currency", function (value) {
+  return valueToDollarsFormatted(value);
+});
+Vue.filter("currencyShort", function (value) {
+  return valueToDollarsAbbreviated(value);
+});
 
 Vue.use(BootstrapVue, {
   BCard: {

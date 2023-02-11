@@ -88,7 +88,7 @@ export const chartOptions = {
   },
 };
 
-export const rangeChartOptions = {
+export const projectionChartOptions = {
   ...chartOptions,
   elements: {
     ...chartOptions.elements,

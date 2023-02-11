@@ -196,12 +196,12 @@ const actions = {
     commit("setEntries", entriesData);
   },
   async updateBalances({ dispatch }, balances) {
-    // const isValid = balances.every((balance) => {
-    //   return validateBalance(balance);
-    // });
-    // if (!isValid) return;
-    // await database.balances.bulkPut(balances);
-    // await dispatch("fetchEntries");
+    const isValid = balances.every((balance) => {
+      return validateBalance(balance);
+    });
+    if (!isValid) return;
+    await database.balances.bulkPut(balances);
+    await dispatch("fetchEntries");
   },
 };
 

@@ -1,16 +1,16 @@
 <template>
-  <validation-observer ref="validationObserver" v-slot="{ handleSubmit }">
-    <b-form
-      v-if="activeMonth"
-      class="py-2"
-      @submit.prevent="handleSubmit(handleSave)"
-    >
-      <h1 class="mb-2">Ledger</h1>
-      <div class="bg-white d-flex mb-2 px-2 py-2 sticky sticky-top">
-        <LedgerMonth v-model="activeMonth" />
+  <validation-observer ref="validationObserver">
+    <h1 class="mb-2">Ledger</h1>
+    <div class="bg-white d-flex mb-2 px-2 py-2 sticky sticky-top">
+      <LedgerMonth v-model="activeMonth" />
+      <ConfirmAction
+        class="ml-auto"
+        ok-title="Delete Entry"
+        ok-variant="danger"
+        v-slot="{ onConfirm }"
+      >
         <b-dropdown
           v-if="entry"
-          class="ml-auto"
           size="sm"
           toggle-class="text-decoration-none"
           no-caret
@@ -21,47 +21,40 @@
             <BIconThreeDots />
             <span class="sr-only"> Actions </span>
           </template>
-          <ConfirmAction
-            class="ml-auto"
-            ok-title="Delete Entry"
-            ok-variant="danger"
-            v-slot="{ onConfirm }"
-          >
-            <b-dropdown-item variant="danger" @click="onConfirm(handleDelete)">
-              Delete Entry…
-            </b-dropdown-item>
-          </ConfirmAction>
+          <b-dropdown-item variant="danger" @click="onConfirm(handleDelete)">
+            Delete Entry…
+          </b-dropdown-item>
         </b-dropdown>
+      </ConfirmAction>
+    </div>
+    <b-tabs
+      v-if="entry"
+      nav-wrapper-class="nav-container border border-primary rounded-lg mb-1"
+      justified
+      no-fade
+      pills
+      size="lg"
+    >
+      <LedgerTab active title="Assets" :total="assetsTotal">
+        <LedgerBalances :balances="assets" />
+      </LedgerTab>
+      <LedgerTab title="Liabilities" :total="liabilitiesTotal">
+        <LedgerBalances :balances="liabilities" />
+      </LedgerTab>
+    </b-tabs>
+    <b-card class="py-5 text-center" v-else>
+      <div class="mb-5 mt-3">
+        <p class="text-muted">There is no entry for this month.</p>
+        <b-button
+          class="px-4"
+          size="lg"
+          variant="success"
+          @click="handleAddEntry"
+        >
+          Add Entry
+        </b-button>
       </div>
-      <b-tabs
-        v-if="entry"
-        nav-wrapper-class="nav-container border border-primary rounded-lg mb-1"
-        justified
-        no-fade
-        pills
-        size="lg"
-      >
-        <LedgerTab active title="Assets" :total="assetsTotal">
-          <LedgerBalances :balances="assets" />
-        </LedgerTab>
-        <LedgerTab title="Liabilities" :total="liabilitiesTotal">
-          <LedgerBalances :balances="liabilities" />
-        </LedgerTab>
-      </b-tabs>
-      <b-card class="py-5 text-center" v-else>
-        <div class="mb-5 mt-3">
-          <p class="text-muted">There is no entry for this month.</p>
-          <b-button
-            class="px-4"
-            size="lg"
-            variant="success"
-            @click="handleAddEntry"
-          >
-            Add Entry
-          </b-button>
-        </div>
-      </b-card>
-    </b-form>
+    </b-card>
   </validation-observer>
 </template>
 
