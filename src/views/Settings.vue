@@ -1,0 +1,73 @@
+<template>
+  <div class="pt-2">
+    <h1>Settings</h1>
+    <b-list-group style="max-width: 420px">
+      <b-list-group-item
+        class="align-items-center bg-light d-flex h5 justify-content-between mb-0 text-primary"
+        to="/settings/assumptions"
+      >
+        <div>Forecast Assumptions</div>
+        <div>
+          <BIconChevronRight aria-hidden="true" shift-h="2" />
+        </div>
+      </b-list-group-item>
+      <b-list-group-item
+        class="align-items-center bg-light d-flex h5 justify-content-between mb-0 text-primary"
+        to="/settings/import"
+      >
+        <div>Import</div>
+        <div>
+          <BIconChevronRight aria-hidden="true" shift-h="2" />
+        </div>
+      </b-list-group-item>
+      <b-list-group-item
+        class="bg-light h5 mb-0 text-primary"
+        :download="dataFilename"
+        :href="dataUri"
+      >
+        Export (.json)
+      </b-list-group-item>
+    </b-list-group>
+  </div>
+</template>
+
+<script>
+import { formatISO } from "date-fns";
+import database from "@/store/database";
+import { BIconChevronRight } from "bootstrap-vue";
+
+export default {
+  name: "Settings",
+  components: { BIconChevronRight },
+  props: {},
+  data() {
+    return {
+      dataExport: "",
+      dataFilename: "",
+      dataImport: "",
+      dataUri: "",
+    };
+  },
+  async mounted() {
+    const accounts = await database.accounts.toArray();
+    const balances = await database.balances.toArray();
+    const entries = await database.entries.toArray();
+    const dataObj = {
+      accounts,
+      balances,
+      entries,
+    };
+    const date = formatISO(new Date(), {
+      representation: "date",
+    });
+    this.dataExport = JSON.stringify(dataObj);
+    this.dataFilename = `net-worth-export-${date}.json`;
+    this.dataUri =
+      "data:text/json;charset=utf-8," + encodeURIComponent(this.dataExport);
+  },
+  computed: {},
+  methods: {},
+};
+</script>
+
+<style scoped></style>
