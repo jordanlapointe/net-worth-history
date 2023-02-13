@@ -11,7 +11,10 @@ export function valueToDollarsFormatted(value) {
   if (!value || !number) {
     return "0.00";
   }
-  return Intl.NumberFormat("en", { minimumFractionDigits: 2 }).format(value);
+  return Intl.NumberFormat("en", {
+    maximumFractionDigits: 2,
+    minimumFractionDigits: 2,
+  }).format(value);
 }
 
 export function valueToNumber(value) {
