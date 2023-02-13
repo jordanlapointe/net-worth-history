@@ -52,10 +52,12 @@ export default {
     const accounts = await database.accounts.toArray();
     const balances = await database.balances.toArray();
     const entries = await database.entries.toArray();
+    const profiles = await database.profiles.toArray();
     const dataObj = {
       accounts,
       balances,
       entries,
+      profiles,
     };
     const date = formatISO(new Date(), {
       representation: "date",

@@ -63,6 +63,7 @@ import {
   validateAccount,
   validateBalance,
   validateEntry,
+  validateProfile,
 } from "@/utilities/validation";
 
 export default {
@@ -81,6 +82,7 @@ export default {
   methods: {
     fetchAccounts: call("accounts/fetchAccounts"),
     fetchEntries: call("entries/fetchEntries"),
+    fetchProfiles: call("profiles/fetchProfiles"),
     getValidationState({ dirty, validated, valid = null }) {
       if ((dirty || validated) && !valid) {
         return false;
@@ -90,7 +92,7 @@ export default {
     async handleImport() {
       const data = await this.fileUpload.text();
       const dataParsed = JSON.parse(data);
-      const { accounts, balances, entries } = dataParsed;
+      const { accounts, balances, entries, profiles } = dataParsed;
       const hasValidAccounts = accounts.every((account) => {
         return validateAccount(account);
       });
@@ -100,15 +102,28 @@ export default {
       const hasValidEntries = entries.every((entry) => {
         return validateEntry(entry);
       });
-      if (!hasValidAccounts || !hasValidBalances || !hasValidEntries) return;
+      const hasValidProfiles = profiles.every((profile) => {
+        return validateProfile(profile);
+      });
+      if (
+        !hasValidAccounts ||
+        !hasValidBalances ||
+        !hasValidEntries ||
+        !hasValidProfiles
+      ) {
+        return;
+      }
       await database.accounts.clear();
       await database.balances.clear();
       await database.entries.clear();
+      await database.profiles.clear();
       await database.accounts.bulkPut(accounts);
       await database.balances.bulkPut(balances);
       await database.entries.bulkPut(entries);
+      await database.profiles.bulkPut(profiles);
       this.fetchAccounts();
       this.fetchEntries();
+      this.fetchProfiles();
       this.$router.push("./");
     },
   },
