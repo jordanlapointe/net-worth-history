@@ -59,7 +59,7 @@ export default {
   props: {},
   data() {
     return {
-      activeTab: 1,
+      activeTab: 0,
       chartOptions,
       projectionChartOptions,
     };
