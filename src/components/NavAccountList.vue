@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="align-items-baseline border-bottom d-flex mb-1 mt-4 mx-3 pb-1">
-      <h2 class="h5 mb-0 text-capitalize">{{ categoryName }}</h2>
+      <h2 class="h5 mb-0 text-capitalize">{{ title }}</h2>
       <p class="h6 mb-0 ml-auto">${{ total | currencyShort }}</p>
     </div>
     <b-nav pills vertical>
@@ -51,6 +51,13 @@ export default {
     ...get("entries", ["mostRecentBalancesByAccountId"]),
     activeId() {
       return Number(this.$route.params.id);
+    },
+    title() {
+      const categoryToTitleMap = {
+        asset: "Assets",
+        liability: "Liabilities",
+      };
+      return categoryToTitleMap[this.categoryName];
     },
   },
   methods: {},
