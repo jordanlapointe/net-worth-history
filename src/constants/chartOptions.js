@@ -98,6 +98,7 @@ export const projectionChartOptions = {
       borderRadius: 0,
     },
     point: {
+      ...chartOptions.elements.point,
       borderColor: "white",
       radius: 0,
       hoverBorderWidth: 2,
@@ -105,6 +106,7 @@ export const projectionChartOptions = {
     },
   },
   interaction: {
+    ...chartOptions.interaction,
     intersect: false,
     mode: "index",
   },
@@ -118,15 +120,6 @@ export const projectionChartOptions = {
           return `${dataset.id}: $${formattedValue}`;
         },
       },
-    },
-  },
-  scales: {
-    ...chartOptions.scales,
-    x: {
-      ...chartOptions.scales.x,
-    },
-    y: {
-      ...chartOptions.scales.y,
     },
   },
   transitions: {
