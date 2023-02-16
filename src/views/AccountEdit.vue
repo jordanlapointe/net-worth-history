@@ -45,7 +45,7 @@
                 @click="onConfirm(handleDelete)"
               >
                 <span class="sr-only">Delete</span>
-                <BIconTrash scale="0.8" shift-v="-1" />
+                <BIconTrash shift-v="-1" />
               </b-button>
             </ConfirmAction>
           </template>
