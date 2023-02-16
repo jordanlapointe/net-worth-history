@@ -23,16 +23,13 @@
 <script>
 import { get } from "vuex-pathify";
 import { Bar } from "vue-chartjs";
-import { chartOptions } from "@/constants/chartOptions";
 
 export default {
   name: "Account",
   components: { Bar },
   props: {},
   data() {
-    return {
-      chartOptions,
-    };
+    return {};
   },
   computed: {
     ...get("accounts", ["accountsById"]),
@@ -41,6 +38,7 @@ export default {
       "balancesByAccountId",
       "mostRecentBalancesByAccountId",
     ]),
+    ...get("ui", ["chartOptions"]),
     account() {
       return this.accountsById[this.accountId];
     },

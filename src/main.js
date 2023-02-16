@@ -12,8 +12,6 @@ import {
   Tooltip,
 } from "chart.js";
 import Vue from "vue";
-import "bootstrap/dist/css/bootstrap.css";
-import "bootstrap-vue/dist/bootstrap-vue.css";
 import {
   valueToDollarsFormatted,
   valueToDollarsAbbreviated,
@@ -21,6 +19,8 @@ import {
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+import "./assets/styles.scss";
+import "bootstrap-vue/dist/bootstrap-vue.css";
 import "./plugins";
 
 ChartJS.register(
@@ -36,18 +36,6 @@ ChartJS.register(
 );
 
 Vue.config.productionTip = false;
-
-// Vue.directive("dark-class", {
-//   bind: function (element, binding) {
-//     const classes = binding.value.split(" ");
-//     const query = window.matchMedia("(prefers-color-scheme: dark)");
-//     const isDarkMode = query.matches;
-//     element.classList.remove(...classes);
-//     if (isDarkMode) {
-//       element.classList.add(...classes);
-//     }
-//   },
-// });
 
 Vue.filter("currency", function (value) {
   return valueToDollarsFormatted(value);

@@ -12,7 +12,7 @@
       />
       <LineChart
         v-if="activeTab === 1"
-        :options="projectionChartOptions"
+        :options="chartOptionsProjection"
         :data="dataNetWorthFuture"
       />
     </div>
@@ -51,7 +51,6 @@
 <script>
 import { get } from "vuex-pathify";
 import { Bar, Line as LineChart } from "vue-chartjs";
-import { chartOptions, projectionChartOptions } from "@/constants/chartOptions";
 
 export default {
   name: "NetWorth",
@@ -60,8 +59,6 @@ export default {
   data() {
     return {
       activeTab: 0,
-      chartOptions,
-      projectionChartOptions,
     };
   },
   computed: {
@@ -77,6 +74,7 @@ export default {
       "mostRecentLiabilitiesTotal",
       "mostRecentNetTotal",
     ]),
+    ...get("ui", ["chartOptions", "chartOptionsProjection", "colors"]),
     dataNetWorth() {
       return {
         labels: this.entryDates,
@@ -89,24 +87,20 @@ export default {
         datasets: [
           {
             data: this.futureTotals.middle,
-            borderColor: "white",
-            hoverBackgroundColor: "white",
+            borderColor: this.colors.white,
             id: "Avg",
-            tooltip: false,
           },
           {
             data: this.futureTotals.low,
             fill: "origin",
-            backgroundColor: "#6c757d",
+            backgroundColor: this.colors.secondary,
             id: "Low",
-            tooltip: false,
           },
           {
             data: this.futureTotals.high,
             fill: "-1",
-            backgroundColor: "#212529",
+            backgroundColor: this.colors.black,
             id: "High",
-            tooltip: false,
           },
         ],
       };

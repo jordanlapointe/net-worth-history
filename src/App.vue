@@ -20,9 +20,14 @@ export default {
   name: "App",
   components: { Nav },
   mounted() {
+    const darkModePreference = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    );
     this.fetchAccounts();
     this.fetchEntries();
     this.fetchProfiles();
+    this.refreshColors();
+    darkModePreference.addEventListener("change", this.refreshColors);
   },
   computed: {
     ...get("entries", ["initialLoad"]),
@@ -31,6 +36,7 @@ export default {
     fetchAccounts: call("accounts/fetchAccounts"),
     fetchEntries: call("entries/fetchEntries"),
     fetchProfiles: call("profiles/fetchProfiles"),
+    refreshColors: call("ui/refreshColors"),
   },
 };
 </script>
