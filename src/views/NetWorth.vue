@@ -4,7 +4,7 @@
       <h1 class="mt-2">Net Worth</h1>
       <p class="h4 ml-auto text-muted">${{ mostRecentNetTotal | currency }}</p>
     </div>
-    <div class="pb-2" style="height: 80vh">
+    <div class="pb-2" style="height: 75vh">
       <Bar
         v-if="activeTab === 0"
         :options="chartOptions"
@@ -16,17 +16,17 @@
         :data="dataNetWorthFuture"
       />
     </div>
-    <b-tabs
-      align="center"
-      class="d-block pb-3"
-      end
-      lazy
-      pills
-      v-model="activeTab"
-    >
-      <b-tab title="History" />
-      <b-tab title="Future" />
-    </b-tabs>
+    <div class="mb-4 text-center">
+      <b-tabs
+        class="border border-primary d-inline-block rounded-lg"
+        style="padding: 1px"
+        pills
+        v-model="activeTab"
+      >
+        <b-tab title="History" />
+        <b-tab title="Future" />
+      </b-tabs>
+    </div>
     <div class="align-items-baseline d-flex mb-1">
       <h2 class="mb-0">Assets</h2>
       <p class="h5 ml-auto mb-0 text-muted">
