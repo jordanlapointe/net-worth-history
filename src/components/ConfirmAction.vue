@@ -6,6 +6,7 @@
       hide-header
       size="sm"
       :visible="showModal"
+      @hide="handleCancel"
       @shown="handleModalShown"
     >
       <p class="h4 mb-4 mt-3 text-center">Are you sure?</p>
