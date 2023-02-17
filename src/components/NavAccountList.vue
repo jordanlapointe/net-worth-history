@@ -37,16 +37,14 @@ import { get } from "vuex-pathify";
 export default {
   name: "NavAccountList",
   components: { BIconPlus },
-  data() {
-    return {};
-  },
   props: {
     accounts: { required: true, type: Array },
     categoryName: { required: true, type: String },
     total: { required: true, type: Number },
   },
-  mounted() {},
-  watch: {},
+  data() {
+    return {};
+  },
   computed: {
     ...get("entries", ["mostRecentBalancesByAccountId"]),
     activeId() {
@@ -60,6 +58,8 @@ export default {
       return categoryToTitleMap[this.categoryName];
     },
   },
+  watch: {},
+  mounted() {},
   methods: {},
 };
 </script>

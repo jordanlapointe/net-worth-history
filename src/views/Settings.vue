@@ -48,6 +48,7 @@ export default {
       dataUri: "",
     };
   },
+  computed: {},
   async mounted() {
     const accounts = await database.accounts.toArray();
     const balances = await database.balances.toArray();
@@ -67,7 +68,6 @@ export default {
     this.dataUri =
       "data:text/json;charset=utf-8," + encodeURIComponent(this.dataExport);
   },
-  computed: {},
   methods: {},
 };
 </script>

@@ -3,34 +3,34 @@
     <h1 class="h2 mb-3">Forecast Assumptions</h1>
     <b-card style="width: 420px">
       <FormInput
-        class="mb-4"
         id="yearly-contribution"
+        v-model="contribution"
+        class="mb-4"
         name="Yearly Contribution"
         prepend="$"
         :rules="{ number: true, required: true }"
         size="lg"
         trim
-        v-model="contribution"
       />
       <FormInput
+        id="high-growth"
+        v-model="growthHigh"
         append="%"
         class="mb-2"
         group-style="max-width: 14em"
-        id="high-growth"
         name="High Growth (Optimistic)"
         :rules="{ number: true, required: true }"
         trim
-        v-model="growthHigh"
       />
       <FormInput
+        id="low-growth"
+        v-model="growthLow"
         append="%"
         class="mb-3"
         group-style="max-width: 10em"
-        id="low-growth"
         name="Low Growth (Pessimistic)"
         :rules="{ number: true, required: true }"
         trim
-        v-model="growthLow"
       />
       <template #footer>
         <b-button class="px-4" type="submit" variant="success"> Save </b-button>

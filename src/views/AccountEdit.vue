@@ -8,17 +8,17 @@
       <b-form @submit.stop.prevent="handleSubmit(handleSave)">
         <b-card footer-class="d-flex" style="max-width: 28em">
           <FormInput
-            class="mb-2"
             id="account-name"
+            v-model.trim="name"
+            class="mb-2"
             name="Name"
             size="lg"
-            v-model.trim="name"
           />
           <FormInput
-            class="mb-2"
             id="account-institution"
-            name="Institution"
             v-model.trim="institution"
+            class="mb-2"
+            name="Institution"
           />
           <template #footer>
             <b-button class="px-4" type="submit" variant="success">
@@ -33,10 +33,10 @@
             </b-button>
             <ConfirmAction
               v-if="id"
+              v-slot="{ onConfirm }"
               class="ml-auto"
               ok-title="Delete"
               ok-variant="danger"
-              v-slot="{ onConfirm }"
             >
               <b-button
                 v-b-tooltip.left="'Delete…'"
@@ -72,9 +72,6 @@ export default {
       name: "",
     };
   },
-  mounted() {
-    this.setInitialValues();
-  },
   computed: {
     ...get("accounts", ["accountsById"]),
     account() {
@@ -95,6 +92,9 @@ export default {
         this.setInitialValues();
       }
     },
+  },
+  mounted() {
+    this.setInitialValues();
   },
   methods: {
     addAccount: call("accounts/addAccount"),

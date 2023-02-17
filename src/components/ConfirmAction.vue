@@ -10,7 +10,7 @@
       @shown="handleModalShown"
     >
       <p class="h4 mb-4 mt-3 text-center">Are you sure?</p>
-      <b-button block ref="cancelButton" @click="handleCancel">
+      <b-button ref="cancelButton" block @click="handleCancel">
         Cancel
       </b-button>
       <b-button block :variant="okVariant" @click="handleOk">

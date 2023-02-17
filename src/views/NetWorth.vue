@@ -20,10 +20,10 @@
     />
     <div class="mb-4 text-center">
       <b-tabs
+        v-model="activeTab"
         class="border border-primary d-inline-block rounded-lg"
         style="padding: 1px"
         pills
-        v-model="activeTab"
       >
         <b-tab title="History" />
         <b-tab title="Future" />

@@ -15,13 +15,13 @@
       >
         <b-input-group :append="append" :prepend="prepend" :style="groupStyle">
           <b-form-input
-            v-on="$listeners"
-            aria-describedby="`input-feedback-${id}`"
             :id="`input-${id}`"
+            aria-describedby="`input-feedback-${id}`"
             :size="size"
             :state="getValidationState(validationContext)"
             :trim="trim"
             :value="value"
+            v-on="$listeners"
             @input="handleChange"
           />
         </b-input-group>

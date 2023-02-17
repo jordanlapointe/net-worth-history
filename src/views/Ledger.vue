@@ -5,10 +5,10 @@
       <div class="bg-white d-flex mb-2 py-2 sticky sticky-top">
         <LedgerMonth v-model="activeMonth" />
         <ConfirmAction
+          v-slot="{ onConfirm }"
           class="ml-auto"
           ok-title="Delete Entry"
           ok-variant="danger"
-          v-slot="{ onConfirm }"
         >
           <b-dropdown
             v-if="entry"
@@ -43,7 +43,7 @@
           <LedgerBalances :balances="liabilities" />
         </LedgerTab>
       </b-tabs>
-      <b-card class="py-5 text-center" v-else>
+      <b-card v-else class="py-5 text-center">
         <div class="mb-5 mt-3">
           <p class="text-muted">There is no entry for this month.</p>
           <b-button
@@ -72,6 +72,14 @@ import { valueToDollarsFormatted, valueToNumber } from "@/utilities/currency";
 
 export default {
   name: "Ledger",
+  components: {
+    BIconThreeDots,
+    ConfirmAction,
+    LedgerBalances,
+    LedgerMonth,
+    LedgerTab,
+    ValidationObserver,
+  },
   data() {
     return {
       assets: [],
@@ -82,16 +90,11 @@ export default {
       activeMonth: "",
     };
   },
-  components: {
-    BIconThreeDots,
-    ConfirmAction,
-    LedgerBalances,
-    LedgerMonth,
-    LedgerTab,
-    ValidationObserver,
-  },
-  mounted() {
-    this.setInitialValues();
+  computed: {
+    ...get("entries", ["entriesMeta", "mostRecentDate"]),
+    entry() {
+      return this.entriesMeta[this.activeMonth];
+    },
   },
   watch: {
     async activeMonth(newValue, oldValue) {
@@ -115,11 +118,8 @@ export default {
       immediate: true,
     },
   },
-  computed: {
-    ...get("entries", ["entriesMeta", "mostRecentDate"]),
-    entry() {
-      return this.entriesMeta[this.activeMonth];
-    },
+  mounted() {
+    this.setInitialValues();
   },
   methods: {
     createEntry: call("entries/createEntry"),

@@ -42,16 +42,14 @@ import NavAccountList from "@/components/NavAccountList";
 export default {
   name: "Nav",
   components: { NavAccountList, BIconArrowBarLeft, BIconArrowBarRight },
+  props: {
+    balances: { default: () => [], type: Array },
+  },
   data() {
     return {
       collapsed: false,
     };
   },
-  props: {
-    balances: { default: () => [], type: Array },
-  },
-  mounted() {},
-  watch: {},
   computed: {
     ...get("accounts", ["accountsOnlyAssets", "accountsOnlyLiabilities"]),
     ...get("entries", ["mostRecentAssetsTotal", "mostRecentLiabilitiesTotal"]),
@@ -59,6 +57,8 @@ export default {
       return this.collapsed ? "Expand" : "Collapse";
     },
   },
+  watch: {},
+  mounted() {},
   methods: {
     async handleToggle() {
       this.collapsed = !this.collapsed;

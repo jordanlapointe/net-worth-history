@@ -16,13 +16,13 @@
           <b-col cols="8">
             <FormInput
               :id="`balance-${balance.id}`"
+              v-model="balance.valueFormatted"
               :name="balance.account.name"
               :label-sr-only="true"
               prepend="$"
               :rules="{ number: true }"
               size="lg"
               trim
-              v-model="balance.valueFormatted"
               @blur="handleBlur(balance)"
             />
           </b-col>

@@ -1,9 +1,9 @@
 <template>
   <validation-observer v-slot="{ handleSubmit }">
     <ConfirmAction
+      v-slot="{ onConfirm }"
       ok-title="Import"
       ok-variant="warning"
-      v-slot="{ onConfirm }"
     >
       <b-form
         class="pt-3"
@@ -22,12 +22,12 @@
               :rules="{ required: true }"
             >
               <b-form-file
+                id="file-upload"
+                v-model="fileUpload"
                 accept=".json"
                 drop-placeholder="Drop .json here"
-                id="file-upload"
                 size="lg"
                 :state="getValidationState(validationContext)"
-                v-model="fileUpload"
               />
             </validation-provider>
           </b-form-group>

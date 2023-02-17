@@ -12,17 +12,17 @@
 export default {
   name: "LedgerTab",
   components: {},
-  data() {
-    return {};
-  },
   props: {
     active: { default: false, type: Boolean },
     title: String,
     total: String,
   },
-  mounted() {},
-  watch: {},
+  data() {
+    return {};
+  },
   computed: {},
+  watch: {},
+  mounted() {},
   methods: {},
 };
 </script>
