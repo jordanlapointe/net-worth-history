@@ -4,18 +4,20 @@
       <h1 class="mt-2">Net Worth</h1>
       <p class="h4 ml-auto text-muted">${{ mostRecentNetTotal | currency }}</p>
     </div>
-    <div class="pb-2" style="height: 75vh">
-      <Bar
-        v-if="activeTab === 0"
-        :options="chartOptions"
-        :data="dataNetWorth"
-      />
-      <LineChart
-        v-if="activeTab === 1"
-        :options="chartOptionsProjection"
-        :data="dataNetWorthFuture"
-      />
-    </div>
+    <AccessibleChart
+      v-if="activeTab === 0"
+      :component="Bar"
+      :data="dataNetWorth"
+      :options="chartOptions"
+      style="height: 75vh"
+    />
+    <AccessibleChart
+      v-if="activeTab === 1"
+      :component="Line"
+      :data="dataNetWorthFuture"
+      :options="chartOptionsProjection"
+      style="height: 75vh"
+    />
     <div class="mb-4 text-center">
       <b-tabs
         class="border border-primary d-inline-block rounded-lg"
@@ -33,32 +35,42 @@
         ${{ mostRecentAssetsTotal | currency }}
       </p>
     </div>
-    <div class="pb-3" style="height: 40vh">
-      <Bar :options="chartOptions" :data="dataAssets" />
-    </div>
-    <div class="align-items-baseline d-flex mb-1">
-      <h2 class="mb-0">Liabilities</h2>
+    <AccessibleChart
+      class="mb-3"
+      :component="Bar"
+      :data="dataAssets"
+      :options="chartOptions"
+      style="height: 40vh"
+    />
+    <div class="align-items-baseline d-flex mb-2">
+      <h2 class="h3 mb-0">Liabilities</h2>
       <p class="h5 ml-auto mb-0 text-muted">
         ${{ mostRecentLiabilitiesTotal | currency }}
       </p>
     </div>
-    <div class="pb-3" style="height: 40vh">
-      <Bar :options="chartOptions" :data="dataLiabilities" />
-    </div>
+    <AccessibleChart
+      :component="Bar"
+      :data="dataLiabilities"
+      :options="chartOptions"
+      style="height: 40vh"
+    />
   </div>
 </template>
 
 <script>
 import { get } from "vuex-pathify";
-import { Bar, Line as LineChart } from "vue-chartjs";
+import { Bar, Line } from "vue-chartjs";
+import AccessibleChart from "@/components/AccessibleChart";
 
 export default {
   name: "NetWorth",
-  components: { Bar, LineChart },
+  components: { AccessibleChart },
   props: {},
   data() {
     return {
       activeTab: 0,
+      Bar,
+      Line,
     };
   },
   computed: {

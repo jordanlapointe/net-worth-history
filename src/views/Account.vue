@@ -1,6 +1,10 @@
 <template>
-  <div v-if="account" class="d-flex flex-column pt-3" style="height: 100vh">
-    <div class="align-items-baseline d-flex">
+  <div
+    v-if="account"
+    class="d-flex flex-column pb-2 pt-3"
+    style="height: 100vh"
+  >
+    <div class="align-items-baseline d-flex mb-4 px-2">
       <div>
         <h1 class="h4 mb-0">{{ account.name }}</h1>
         <p>
@@ -14,22 +18,26 @@
         ${{ mostRecentBalancesByAccountId[account.id] | currency }}
       </p>
     </div>
-    <div class="flex-grow-1 pb-2">
-      <Bar :options="chartOptions" :data="chartNetWorth" />
-    </div>
+    <AccessibleChart
+      class="flex-grow-1"
+      :component="Bar"
+      :data="chartNetWorth"
+      :options="chartOptions"
+    />
   </div>
 </template>
 
 <script>
 import { get } from "vuex-pathify";
 import { Bar } from "vue-chartjs";
+import AccessibleChart from "@/components/AccessibleChart";
 
 export default {
   name: "Account",
-  components: { Bar },
+  components: { AccessibleChart },
   props: {},
   data() {
-    return {};
+    return { Bar };
   },
   computed: {
     ...get("accounts", ["accountsById"]),

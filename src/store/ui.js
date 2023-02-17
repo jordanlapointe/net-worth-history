@@ -89,6 +89,9 @@ const getters = {
       responsive: true,
       scales: {
         x: {
+          afterFit: function (scaleInstance) {
+            scaleInstance.height = 80;
+          },
           border: {
             color: colors.secondary,
           },
@@ -108,6 +111,9 @@ const getters = {
           },
         },
         y: {
+          afterFit: function (scaleInstance) {
+            scaleInstance.width = 60;
+          },
           border: {
             width: 0,
           },
