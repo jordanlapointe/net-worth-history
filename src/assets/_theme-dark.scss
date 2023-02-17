@@ -12,18 +12,15 @@ $blue: lighten(#007bff, 15%);
 $green: lighten(#28a745, 15%);
 $red: darken(#dc3545, 5%);
 $secondary: $gray-400;
-$yellow: lighten(#ffc107, 15%);
 $white: darken($gray-100, 5%);
+$yellow: lighten(#ffc107, 15%);
 
 $link-hover-color: lighten($blue, 15%);
-
 $list-group-bg: $gray-100;
 $list-group-hover-bg: $gray-200;
 $list-group-action-color: $blue;
 $list-group-action-hover-color: lighten($blue, 15%);
-
 $modal-backdrop-bg: $white;
-
 $yiq-text-dark: $white;
 $yiq-text-light: $gray-900;
 
@@ -34,6 +31,16 @@ $yiq-text-light: $gray-900;
 @import "node_modules/bootstrap/scss/functions";
 @import "node_modules/bootstrap/scss/variables";
 @import "node_modules/bootstrap/scss/mixins";
+@mixin text-emphasis-variant($parent, $color, $ignore-warning: false) {
+  #{$parent} {
+    color: $color !important;
+  }
+  a#{$parent} {
+    @include hover-focus() {
+      color: lighten($color, 15%) !important;
+    }
+  }
+}
 @import "node_modules/bootstrap/scss/root";
 @import "node_modules/bootstrap/scss/reboot";
 @import "node_modules/bootstrap/scss/type";

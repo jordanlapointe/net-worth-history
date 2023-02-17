@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <div class="align-items-baseline d-flex">
-      <h1 class="mt-2">Net Worth</h1>
+  <div class="py-2">
+    <div class="align-items-baseline d-flex mb-2">
+      <h1 class="h2 mb-0">Net Worth</h1>
       <p class="h4 ml-auto text-muted">${{ mostRecentNetTotal | currency }}</p>
     </div>
     <AccessibleChart
@@ -29,8 +29,8 @@
         <b-tab title="Future" />
       </b-tabs>
     </div>
-    <div class="align-items-baseline d-flex mb-1">
-      <h2 class="mb-0">Assets</h2>
+    <div class="align-items-baseline d-flex mb-2">
+      <h2 class="h3 mb-0">Assets</h2>
       <p class="h5 ml-auto mb-0 text-muted">
         ${{ mostRecentAssetsTotal | currency }}
       </p>

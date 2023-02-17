@@ -1,8 +1,8 @@
 <template>
   <div class="pb-3 pt-2">
     <validation-observer ref="validationObserver">
-      <h1 class="mb-2">Ledger</h1>
-      <div class="bg-white d-flex mb-2 px-2 py-2 sticky sticky-top">
+      <h1 class="h2 mb-2">Ledger</h1>
+      <div class="bg-white d-flex mb-2 py-2 sticky sticky-top">
         <LedgerMonth v-model="activeMonth" />
         <ConfirmAction
           class="ml-auto"
