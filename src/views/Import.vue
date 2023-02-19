@@ -9,7 +9,9 @@
         class="pt-3"
         @submit.stop.prevent="handleSubmit(() => onConfirm(handleImport))"
       >
-        <h1 class="h2 mb-4">Import</h1>
+        <b-link class="h5" to="./">Settings</b-link>
+        <BIconSlashLg rotate="-20" variant="secondary" />
+        <h1 class="h3 mb-3">Import</h1>
         <b-card style="width: fit-content">
           <b-form-group
             class="mb-0"
@@ -55,6 +57,7 @@
 </template>
 
 <script>
+import { BIconSlashLg } from "bootstrap-vue";
 import { ValidationObserver, ValidationProvider } from "vee-validate";
 import { call } from "vuex-pathify";
 import ConfirmAction from "@/components/ConfirmAction";
@@ -68,7 +71,12 @@ import {
 
 export default {
   name: "Import",
-  components: { ConfirmAction, ValidationObserver, ValidationProvider },
+  components: {
+    BIconSlashLg,
+    ConfirmAction,
+    ValidationObserver,
+    ValidationProvider,
+  },
   props: {},
   data() {
     return { fileUpload: undefined, isValid: null };

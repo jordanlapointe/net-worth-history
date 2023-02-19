@@ -1,6 +1,7 @@
 <template>
   <div class="align-items-stretch d-flex">
     <b-button
+      class="mr-1"
       size="sm"
       variant="outline-secondary"
       @click="handleMonthDecrement"
@@ -9,7 +10,7 @@
       <BIconChevronLeft aria-hidden="true" shift-h="-1" />
     </b-button>
     <b-button
-      class="ml-1"
+      class="mr-2"
       size="sm"
       variant="outline-secondary"
       @click="handleMonthIncrement"
@@ -19,7 +20,7 @@
     </b-button>
     <b-form-select
       :value="value"
-      class="ml-1 pl-3 pr-5 py-0"
+      class="py-0"
       :options="options"
       style="font-size: 1.25rem; height: auto"
       @input="handleSelect"

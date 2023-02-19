@@ -1,8 +1,10 @@
 <template>
   <div class="py-2">
-    <div class="align-items-baseline d-flex mb-2">
+    <div class="align-items-baseline d-flex mb-4">
       <h1 class="h2 mb-0">Net Worth</h1>
-      <p class="h4 ml-auto text-muted">${{ mostRecentNetTotal | currency }}</p>
+      <p class="h4 ml-auto text-muted" data-testid="NetWorth-net-total">
+        ${{ mostRecentNetTotal | currency }}
+      </p>
     </div>
     <AccessibleChart
       v-if="activeTab === 0"
@@ -18,20 +20,21 @@
       :options="chartOptionsProjection"
       style="height: 75vh"
     />
-    <div class="mb-4 text-center">
+    <div class="text-center">
       <b-tabs
         v-model="activeTab"
         class="border border-primary d-inline-block rounded-lg"
         style="padding: 1px"
         pills
       >
-        <b-tab title="History" />
-        <b-tab title="Future" />
+        <b-tab title-link-class="px-4" title="History" />
+        <b-tab title-link-class="px-4" title="Future" />
       </b-tabs>
+      <hr />
     </div>
     <div class="align-items-baseline d-flex mb-2">
-      <h2 class="h3 mb-0">Assets</h2>
-      <p class="h5 ml-auto mb-0 text-muted">
+      <h2 class="h3 mb-1">Assets</h2>
+      <p class="h5 ml-auto mb-0 text-muted" data-testid="NetWorth-assets-total">
         ${{ mostRecentAssetsTotal | currency }}
       </p>
     </div>
@@ -43,8 +46,11 @@
       style="height: 40vh"
     />
     <div class="align-items-baseline d-flex mb-2">
-      <h2 class="h3 mb-0">Liabilities</h2>
-      <p class="h5 ml-auto mb-0 text-muted">
+      <h2 class="h3 mb-1">Liabilities</h2>
+      <p
+        class="h5 ml-auto mb-0 text-muted"
+        data-testid="NetWorth-liabilities-total"
+      >
         ${{ mostRecentLiabilitiesTotal | currency }}
       </p>
     </div>

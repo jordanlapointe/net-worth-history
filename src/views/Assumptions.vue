@@ -1,6 +1,8 @@
 <template>
   <b-form class="pt-3" @submit.stop.prevent="handleSubmit">
-    <h1 class="h2 mb-3">Forecast Assumptions</h1>
+    <b-link class="h5" to="./">Settings</b-link>
+    <BIconSlashLg rotate="-20" variant="secondary" />
+    <h1 class="h3 mb-3">Forecast Assumptions</h1>
     <b-card style="width: 420px">
       <FormInput
         id="yearly-contribution"
@@ -51,10 +53,11 @@
 import FormInput from "@/components/FormInput.vue";
 import { call, get } from "vuex-pathify";
 import { valueToDollarsFormatted, valueToNumber } from "@/utilities/currency";
+import { BIconSlashLg } from "bootstrap-vue";
 
 export default {
   name: "Assumptions",
-  components: { FormInput },
+  components: { FormInput, BIconSlashLg },
   props: {},
   data() {
     return {
