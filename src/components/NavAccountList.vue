@@ -2,12 +2,18 @@
   <div>
     <div class="align-items-baseline border-bottom d-flex mb-1 mt-4 mx-3 pb-1">
       <h2 class="h5 mb-0 text-capitalize">{{ title }}</h2>
-      <p class="h6 mb-0 ml-auto">${{ total | currencyShort }}</p>
+      <p
+        class="h6 mb-0 ml-auto"
+        :data-testid="`NavAccountList-${categoryName}Total`"
+      >
+        ${{ total | currencyShort }}
+      </p>
     </div>
     <b-nav pills vertical>
       <b-nav-item
         v-for="account in accounts"
         :key="account.id"
+        :data-testid="`NavAccountList-${categoryName}-${account.id}`"
         :to="`/accounts/${account.id}`"
       >
         <div class="align-items-baseline d-flex">

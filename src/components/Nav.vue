@@ -16,7 +16,7 @@
       <b-nav pills vertical>
         <b-nav-item active-class="" exact-active-class="active" to="/">
           Net Worth
-          <span class="small float-right">
+          <span class="small float-right" data-testid="Nav-netWorth">
             ${{ mostRecentNetTotal | currencyShort }}
           </span>
         </b-nav-item>

@@ -32,4 +32,19 @@ describe("New User", () => {
       "$38,821.58, $36,723.41, $40,919.76"
     );
   });
+
+  it("should show category totals in nav", () => {
+    cy.getTestId("Nav-netWorth").contains("$270");
+    cy.getTestId("NavAccountList-assetTotal").contains("$290");
+    cy.getTestId("NavAccountList-liabilityTotal").contains("$20");
+  });
+
+  it("should show account values in nav", () => {
+    cy.getTestId("Nav-netWorth").contains("$270");
+    cy.getTestId("NavAccountList-assetTotal").contains("$290");
+    cy.getTestId("NavAccountList-liabilityTotal").contains("$20");
+    cy.getTestId("NavAccountList-asset-2").contains("$70");
+    cy.getTestId("NavAccountList-asset-3").contains("$220");
+    cy.getTestId("NavAccountList-liability-1").contains("$20");
+  });
 });
