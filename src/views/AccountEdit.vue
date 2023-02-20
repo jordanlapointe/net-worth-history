@@ -87,15 +87,14 @@ export default {
     },
   },
   watch: {
-    account(newValue, oldValue) {
-      if (newValue && !oldValue) {
+    id: {
+      handler() {
         this.setInitialValues();
-      }
+      },
+      immediate: true,
     },
   },
-  mounted() {
-    this.setInitialValues();
-  },
+  mounted() {},
   methods: {
     addAccount: call("accounts/addAccount"),
     deleteAccount: call("accounts/deleteAccount"),
@@ -123,9 +122,8 @@ export default {
       }
     },
     setInitialValues() {
-      if (!this.account) return;
-      this.name = this.account.name;
-      this.institution = this.account.institution;
+      this.name = this.account?.name || "";
+      this.institution = this.account?.institution || "";
     },
   },
 };
