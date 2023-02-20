@@ -13,6 +13,7 @@
         v-for="(label, index) in data.labels"
         :key="label"
         class="border-0 bg-transparent p-0 w-100"
+        :data-testid="`${id}-button-${index}`"
         variant="outline-dark"
         @blur="handleBlur(index)"
         @mouseover="handleHover(index)"
@@ -41,6 +42,7 @@ export default {
     data: { required: true, type: Object },
     options: { required: true, type: Object },
     component: { required: true, type: Object },
+    id: { required: true, type: String },
   },
   data() {
     return {};

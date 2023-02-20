@@ -8,6 +8,7 @@
     </div>
     <AccessibleChart
       v-if="activeTab === 0"
+      id="NetWorth-chart"
       :component="Bar"
       :data="dataNetWorth"
       :options="chartOptions"
@@ -15,6 +16,7 @@
     />
     <AccessibleChart
       v-if="activeTab === 1"
+      id="NetWorth-futureChart"
       :component="Line"
       :data="dataNetWorthFuture"
       :options="chartOptionsProjection"
@@ -39,6 +41,7 @@
       </p>
     </div>
     <AccessibleChart
+      id="NetWorth-assetsChart"
       class="mb-3"
       :component="Bar"
       :data="dataAssets"
@@ -55,6 +58,7 @@
       </p>
     </div>
     <AccessibleChart
+      id="NetWorth-liabilitiesChart"
       :component="Bar"
       :data="dataLiabilities"
       :options="chartOptions"
