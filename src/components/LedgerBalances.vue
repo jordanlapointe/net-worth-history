@@ -41,15 +41,15 @@ import { valueToNumber } from "@/utilities/currency";
 export default {
   name: "LedgerBalances",
   components: { FormInput, ValidationObserver },
-  data() {
-    return {};
-  },
   props: {
     balances: { default: () => [], type: Array },
   },
-  mounted() {},
-  watch: {},
+  data() {
+    return {};
+  },
   computed: {},
+  watch: {},
+  mounted() {},
   methods: {
     updateBalances: call("entries/updateBalances"),
     handleBlur(balance) {
