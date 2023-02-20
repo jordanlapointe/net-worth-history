@@ -1,2 +1,3 @@
-@import url("_theme-dark.scss") screen and (prefers-color-scheme: dark);
-@import url("_theme-light.scss") screen and (prefers-color-scheme: light);
+@import url("_theme-dark.scss") (prefers-color-scheme: dark);
+@import url("_theme-light.scss") (prefers-color-scheme: light),
+  (prefers-color-scheme: no-preference);

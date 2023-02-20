@@ -30,7 +30,12 @@
       </b-nav-item>
       <b-nav-item :to="`/accounts/add/${categoryName}`">
         Add <span class="text-capitalize">{{ categoryName }}</span>
-        <BIconPlus aria-hidden="true" shift-v="-1" />
+        <BIconPlus
+          aria-hidden="true"
+          class="float-right"
+          scale="1.4"
+          shift-v="-1"
+        />
       </b-nav-item>
     </b-nav>
   </div>

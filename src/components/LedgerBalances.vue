@@ -1,11 +1,7 @@
 <template>
   <validation-observer ref="validationObserver">
     <b-list-group>
-      <b-list-group-item
-        v-for="balance in balances"
-        :key="balance.id"
-        class="bg-light"
-      >
+      <b-list-group-item v-for="balance in balances" :key="balance.id">
         <b-form-row>
           <b-col cols="3">
             {{ balance.account.name }}
