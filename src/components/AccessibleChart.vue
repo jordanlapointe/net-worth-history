@@ -18,7 +18,9 @@
         @mouseover="handleHover(index)"
         @focus="handleFocus(index)"
         @keydown.left="handleArrowLeft(index, $event)"
+        @keydown.meta.left="handleArrowLeftMeta(index, $event)"
         @keydown.right="handleArrowRight(index, $event)"
+        @keydown.meta.right="handleArrowRightMeta(index, $event)"
       >
         <span class="sr-only">
           {{ formatLabel(label) }}: {{ getValue(index) }}
@@ -65,20 +67,26 @@ export default {
     handleArrowLeft(index, { target }) {
       target.previousSibling.focus();
     },
+    handleArrowLeftMeta(index, { target }) {
+      target.parentNode.firstChild.focus();
+    },
     handleArrowRight(index, { target }) {
       target.nextSibling.focus();
     },
+    handleArrowRightMeta(index, { target }) {
+      target.parentNode.lastChild.focus();
+    },
     handleBlur() {
       this.$nextTick(() => {
-        if (!this.containsFocus()) {
-          this.clearActive();
-        }
+        if (this.containsFocus()) return;
+        this.clearActive();
       });
     },
     handleFocus(index) {
       this.setActive(index);
     },
     handleHover(index) {
+      if (this.containsFocus()) return;
       this.setActive(index);
     },
     handleMouseleave() {

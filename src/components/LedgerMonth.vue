@@ -5,6 +5,7 @@
       size="sm"
       variant="outline-secondary"
       @click="handleMonthDecrement"
+      @click.meta="handleMonthDecrementMeta"
     >
       <span class="sr-only">Previous Month</span>
       <BIconChevronLeft aria-hidden="true" shift-h="-1" />
@@ -14,6 +15,7 @@
       size="sm"
       variant="outline-secondary"
       @click="handleMonthIncrement"
+      @click.meta="handleMonthIncrementMeta"
     >
       <span class="sr-only">Next Month</span>
       <BIconChevronRight aria-hidden="true" shift-h="1" />
@@ -83,10 +85,21 @@ export default {
       this.$emit("input", value);
     },
     handleMonthDecrement() {
-      this.emitChange(addMonthsIso(this.value, -1));
+      const lastMonth = addMonthsIso(this.value, -1);
+      this.emitChange(lastMonth);
+    },
+    handleMonthDecrementMeta() {
+      const lastMonth = this.entryDates[0];
+      this.emitChange(lastMonth);
     },
     handleMonthIncrement() {
-      this.emitChange(addMonthsIso(this.value, 1));
+      const nextMonth = addMonthsIso(this.value, 1);
+      this.emitChange(nextMonth);
+    },
+    handleMonthIncrementMeta() {
+      const lastIndex = this.entryDates.length - 1;
+      const lastMonth = this.entryDates[lastIndex];
+      this.emitChange(lastMonth);
     },
     handleSelect(value) {
       this.emitChange(value);
