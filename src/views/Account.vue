@@ -19,6 +19,7 @@
       </p>
     </div>
     <AccessibleChart
+      id="Account-chart"
       class="flex-grow-1"
       :component="Bar"
       :data="chartNetWorth"
