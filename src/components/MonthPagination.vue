@@ -11,7 +11,7 @@
       <BIconChevronLeft aria-hidden="true" shift-h="-1" />
     </b-button>
     <b-button
-      class="mr-2 text-dark"
+      class="text-dark"
       size="sm"
       variant="outline-secondary"
       @click="handleMonthIncrement"
@@ -20,20 +20,13 @@
       <span class="sr-only">Next Month</span>
       <BIconChevronRight aria-hidden="true" shift-h="1" />
     </b-button>
-    <b-form-select
-      :value="value"
-      class="py-0"
-      :options="options"
-      style="font-size: 1.25rem; height: auto"
-      @input="handleSelect"
-    />
   </div>
 </template>
 
 <script>
 import { get } from "vuex-pathify";
 import { BIconChevronLeft, BIconChevronRight } from "bootstrap-vue";
-import { format, formatISO, parseISO, startOfMonth } from "date-fns";
+import { formatISO, startOfMonth } from "date-fns";
 import { addMonthsIso } from "@/utilities/dates";
 
 export default {
@@ -52,45 +45,24 @@ export default {
     },
   },
   data() {
-    return {
-      baseOptions: [],
-    };
+    return {};
   },
   computed: {
     ...get("entries", ["entryDates"]),
-    monthFormatted() {
-      return format(parseISO(this.value), "MMMM yyy");
-    },
-    options() {
-      const hasEntry = this.entryDates.includes(this.value);
-      return hasEntry
-        ? this.baseOptions
-        : this.baseOptions.concat([
-            {
-              text: format(parseISO(this.value), "LLLL yyyy"),
-              value: this.value,
-            },
-          ]);
-    },
   },
   watch: {},
-  mounted() {
-    this.baseOptions = this.entryDates.map((date) => ({
-      text: format(parseISO(date), "LLLL yyyy"),
-      value: date,
-    }));
-  },
+  mounted() {},
   methods: {
     emitChange(value) {
       this.$emit("input", value);
     },
     handleMonthDecrement() {
-      const lastMonth = addMonthsIso(this.value, -1);
-      this.emitChange(lastMonth);
+      const previousMonth = addMonthsIso(this.value, -1);
+      this.emitChange(previousMonth);
     },
     handleMonthDecrementMeta() {
-      const lastMonth = this.entryDates[0];
-      this.emitChange(lastMonth);
+      const firstMonth = this.entryDates[0];
+      this.emitChange(firstMonth);
     },
     handleMonthIncrement() {
       const nextMonth = addMonthsIso(this.value, 1);
@@ -100,9 +72,6 @@ export default {
       const lastIndex = this.entryDates.length - 1;
       const lastMonth = this.entryDates[lastIndex];
       this.emitChange(lastMonth);
-    },
-    handleSelect(value) {
-      this.emitChange(value);
     },
   },
 };
