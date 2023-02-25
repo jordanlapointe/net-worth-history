@@ -28,8 +28,8 @@ export function valueToNumber(value) {
     return isNaN ? 0 : value;
   }
   if (isString) {
-    const valueWithoutCommas = value.replace(",", "");
-    const valueNumeric = Number(valueWithoutCommas);
+    const valueNoExtras = value.replaceAll(/[,$]/g, "");
+    const valueNumeric = Number(valueNoExtras);
     const isNaN = Number.isNaN(valueNumeric);
     return isNaN ? 0 : valueNumeric;
   }
