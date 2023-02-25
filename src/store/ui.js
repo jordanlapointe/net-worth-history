@@ -31,6 +31,9 @@ const getters = {
           locale: enUS,
         },
       },
+      animation: {
+        duration: 600,
+      },
       elements: {
         bar: {
           backgroundColor: colors.secondary,
