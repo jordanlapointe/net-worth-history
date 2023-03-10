@@ -1,7 +1,7 @@
 <template>
   <validation-observer ref="validationObserver">
-    <b-list-group>
-      <b-list-group-item v-for="balance in balances" :key="balance.id">
+    <b-list-group v-if="balancesFiltered.length > 0">
+      <b-list-group-item v-for="balance in balancesFiltered" :key="balance.id">
         <b-form-row>
           <b-col cols="3">
             {{ balance.account.name }}
@@ -25,12 +25,15 @@
         </b-form-row>
       </b-list-group-item>
     </b-list-group>
+    <b-card v-else-if="accountFilter" class="lead text-center">
+      No accounts match the filter “{{ accountFilter }}”
+    </b-card>
   </validation-observer>
 </template>
 
 <script>
 import { ValidationObserver } from "vee-validate";
-import { call } from "vuex-pathify";
+import { call, get } from "vuex-pathify";
 import FormInput from "@/components/FormInput.vue";
 import { valueToNumber } from "@/utilities/currency";
 
@@ -43,7 +46,17 @@ export default {
   data() {
     return {};
   },
-  computed: {},
+  computed: {
+    ...get("ui", ["accountFilter"]),
+    balancesFiltered() {
+      const filterLowerCase = this.accountFilter.toLowerCase();
+      return this.balances.filter(({ account }) => {
+        const { name, institution } = account;
+        const accountText = `${institution} ${name}`.toLowerCase();
+        return accountText.includes(filterLowerCase);
+      });
+    },
+  },
   watch: {},
   mounted() {},
   methods: {

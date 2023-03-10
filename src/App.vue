@@ -1,15 +1,10 @@
 <template>
-  <b-container v-if="initialLoad" fluid>
-    <b-row>
-      <b-col
-        class="column-nav bg-light pb-4 pt-2 px-1"
-        style="max-width: fit-content"
-      >
-        <Nav />
-      </b-col>
-      <b-col class="column-content"> <router-view /> </b-col>
-    </b-row>
-  </b-container>
+  <div v-if="initialLoad" class="d-flex">
+    <Nav v-model="navCollapsed" class="bg-light p-0 overflow-auto vh-100" />
+    <div class="flex-grow-1 overflow-auto px-3 vh-100">
+      <router-view />
+    </div>
+  </div>
 </template>
 
 <script>
@@ -19,6 +14,11 @@ import Nav from "./components/Nav";
 export default {
   name: "App",
   components: { Nav },
+  data() {
+    return {
+      navCollapsed: false,
+    };
+  },
   computed: {
     ...get("entries", ["initialLoad"]),
   },
@@ -41,14 +41,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.app-container,
-.column-content,
-.column-nav {
-  height: 100vh;
-}
-.column-content,
-.column-nav {
-  overflow: auto;
-}
-</style>
+<style scoped></style>

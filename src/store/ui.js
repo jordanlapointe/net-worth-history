@@ -8,6 +8,7 @@ import {
 } from "@/utilities/currency";
 
 const state = {
+  accountFilter: "",
   colors: {
     black: "",
     dark: "",

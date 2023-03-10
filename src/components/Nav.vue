@@ -1,22 +1,30 @@
 <template>
-  <div>
-    <div class="mb-2 text-right">
-      <b-button
-        v-b-tooltip.bottomleft="toggleButtonText"
-        size="sm"
-        variant="outline-secondary"
-        @click="handleToggle"
-      >
-        <BIconArrowBarRight v-if="collapsed" aria-hidden="true" />
-        <BIconArrowBarLeft v-else aria-hidden="true" />
-        <span class="sr-only"> {{ toggleButtonText }} </span>
-      </b-button>
+  <div
+    class="border-right"
+    :class="showBorderEffect ? 'border-dark' : 'border-light'"
+    :style="collapsed ? '' : 'width: 20vw'"
+  >
+    <div class="bg-light d-flex mb-1 px-3 py-2 sticky-top">
+      <NavToggle
+        v-model="collapsed"
+        @blur="showBorderEffect = false"
+        @focus="showBorderEffect = true"
+        @mouseover="showBorderEffect = true"
+        @mouseout="showBorderEffect = false"
+      />
+      <b-input-group v-if="!collapsed" class="ml-3" size="sm">
+        <b-form-input
+          v-model="accountFilter"
+          class="px-3"
+          placeholder="Filter Accounts"
+        />
+      </b-input-group>
     </div>
-    <div v-if="!collapsed">
+    <div v-if="!collapsed" class="px-1">
       <b-nav pills vertical>
         <b-nav-item active-class="" exact-active-class="active" to="/">
           Net Worth
-          <span class="small float-right" data-testid="Nav-netWorth">
+          <span class="float-right" data-testid="Nav-netWorth">
             ${{ mostRecentNetTotal | currencyShort }}
           </span>
         </b-nav-item>
@@ -38,19 +46,23 @@
 </template>
 
 <script>
-import { BIconArrowBarLeft, BIconArrowBarRight } from "bootstrap-vue";
-import { get } from "vuex-pathify";
+import { get, sync } from "vuex-pathify";
 import NavAccountList from "@/components/NavAccountList";
+import NavToggle from "@/components/NavToggle";
 
 export default {
   name: "Nav",
-  components: { NavAccountList, BIconArrowBarLeft, BIconArrowBarRight },
+  components: {
+    NavAccountList,
+    NavToggle,
+  },
   props: {
-    balances: { default: () => [], type: Array },
+    value: { default: false, type: Boolean },
   },
   data() {
     return {
       collapsed: false,
+      showBorderEffect: false,
     };
   },
   computed: {
@@ -60,6 +72,7 @@ export default {
       "mostRecentLiabilitiesTotal",
       "mostRecentNetTotal",
     ]),
+    accountFilter: sync("ui/accountFilter"),
     toggleButtonText() {
       return this.collapsed ? "Expand" : "Collapse";
     },
