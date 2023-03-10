@@ -1,6 +1,6 @@
 <template>
   <div class="pt-2">
-    <h1 class="h2 mb-3">Settings</h1>
+    <h1 class="h2 mb-2">Settings</h1>
     <b-list-group style="max-width: 420px">
       <b-list-group-item
         class="align-items-center d-flex h5 justify-content-between mb-0"

@@ -14,7 +14,7 @@
         :key="label"
         class="border-0 bg-transparent p-0 w-100"
         :data-testid="`${id}-button-${index}`"
-        variant="outline-dark"
+        variant="outline-secondary"
         @blur="handleBlur(index)"
         @mouseover="handleHover(index)"
         @focus="handleFocus(index)"

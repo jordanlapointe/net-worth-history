@@ -1,13 +1,9 @@
 <template>
-  <div
-    v-if="account"
-    class="d-flex flex-column pb-2 pt-3"
-    style="height: 100vh"
-  >
-    <div class="align-items-baseline d-flex mb-4 px-2">
+  <div v-if="account" class="d-flex flex-column pb-4 pt-3 vh-100">
+    <div class="align-items-baseline d-flex mb-4">
       <div>
-        <h1 class="h4 mb-0">{{ account.name }}</h1>
-        <p>
+        <h1 class="h5 mb-1">{{ account.name }}</h1>
+        <p class="mb-0">
           {{ account.institution }}
           <b-link class="ml-2" :to="`/accounts/${account.id}/edit`">
             Edit

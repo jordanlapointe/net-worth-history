@@ -9,19 +9,32 @@ $gray-200: #343a40;
 $gray-100: #212529;
 $black: #fff;
 $blue: lighten(#007bff, 15%);
+$dark: $gray-600;
 $green: lighten(#28a745, 15%);
-$red: darken(#dc3545, 5%);
+$red: lighten(#dc3545, 5%);
 $secondary: $gray-400;
 $white: darken($gray-100, 5%);
 $yellow: lighten(#ffc107, 15%);
 
+$border-radius-lg: 0.375rem;
+
+$custom-select-border-color: $secondary;
+
 $dropdown-border-color: $secondary;
+
+$input-border-color: $secondary;
+$input-placeholder-color: $secondary;
+
 $link-hover-color: lighten($blue, 15%);
+
 $list-group-bg: $gray-100;
 $list-group-hover-bg: $gray-200;
 $list-group-action-color: $blue;
+
 $list-group-action-hover-color: lighten($blue, 15%);
+
 $modal-backdrop-bg: $white;
+
 $yiq-text-dark: $white;
 $yiq-text-light: $gray-900;
 

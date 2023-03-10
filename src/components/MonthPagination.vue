@@ -1,7 +1,7 @@
 <template>
   <div class="align-items-stretch d-flex">
     <b-button
-      class="mr-1 text-dark"
+      class="mr-1"
       size="sm"
       variant="outline-secondary"
       @click="handleMonthDecrement"
@@ -11,7 +11,6 @@
       <BIconChevronLeft aria-hidden="true" shift-h="-1" />
     </b-button>
     <b-button
-      class="text-dark"
       size="sm"
       variant="outline-secondary"
       @click="handleMonthIncrement"

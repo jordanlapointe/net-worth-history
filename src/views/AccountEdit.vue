@@ -10,7 +10,7 @@
           <FormInput
             id="account-name"
             v-model.trim="name"
-            class="mb-2"
+            class="mb-3"
             name="Name"
             size="lg"
           />

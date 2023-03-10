@@ -41,7 +41,7 @@ const getters = {
           borderColor: colors.white,
           borderWidth: 1,
           borderRadius: 7,
-          hoverBackgroundColor: colors.dark,
+          hoverBackgroundColor: colors.black,
           hoverBorderWidth: 0,
         },
       },
@@ -54,7 +54,7 @@ const getters = {
           display: false,
         },
         tooltip: {
-          backgroundColor: colors.dark,
+          backgroundColor: colors.black,
           bodyAlign: "center",
           bodyColor: colors.light,
           bodyFont: {
@@ -108,7 +108,7 @@ const getters = {
               const label = this.getLabelForValue(value);
               return format(parseISO(label), "LLL yyyy");
             },
-            color: colors.dark,
+            color: colors.black,
             font: {
               size: 14,
             },

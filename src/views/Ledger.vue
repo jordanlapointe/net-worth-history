@@ -1,10 +1,10 @@
 <template>
   <div class="pb-3 pt-2">
     <validation-observer ref="validationObserver">
-      <h1 class="h2 mb-1">Ledger</h1>
-      <div class="bg-white d-flex mb-3 py-2 sticky sticky-top">
-        <MonthPagination v-model="activeMonth" class="mr-2" />
-        <MonthSelect v-model="activeMonth" />
+      <h1 class="h2 mb-2">Ledger</h1>
+      <div class="bg-white d-flex mb-2 py-2 sticky sticky-top">
+        <MonthPagination v-model="activeMonth" />
+        <MonthSelect v-model="activeMonth" class="ml-2" />
         <ConfirmAction
           v-slot="{ onConfirm }"
           class="ml-auto"

@@ -8,10 +8,19 @@ $gray-700: #495057;
 $gray-800: #343a40;
 $gray-900: #212529;
 $black: #000;
+$dark: $gray-600;
 $white: #fff;
-$secondary: $gray-400;
+$secondary: $gray-500;
 
-$dropdown-border-color: $secondary;
+$border-radius-lg: 0.375rem;
+
+$custom-select-border-color: $dark;
+
+$dropdown-border-color: $dark;
+
+$input-border-color: $dark;
+$input-placeholder-color: $secondary;
+
 $modal-backdrop-bg: $white;
 
 :root {
