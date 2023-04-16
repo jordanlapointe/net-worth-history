@@ -69,14 +69,16 @@ export default {
     handleArrowLeft(index, { target }) {
       target.previousSibling.focus();
     },
-    handleArrowLeftMeta(index, { target }) {
-      target.parentNode.firstChild.focus();
+    handleArrowLeftMeta(index, event) {
+      event.preventDefault();
+      event.target.parentNode.firstChild.focus();
     },
     handleArrowRight(index, { target }) {
       target.nextSibling.focus();
     },
-    handleArrowRightMeta(index, { target }) {
-      target.parentNode.lastChild.focus();
+    handleArrowRightMeta(index, event) {
+      event.preventDefault();
+      event.target.parentNode.lastChild.focus();
     },
     handleBlur() {
       this.$nextTick(() => {

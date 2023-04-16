@@ -19,8 +19,6 @@ import {
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import "./assets/styles.scss";
-import "bootstrap-vue/dist/bootstrap-vue.css";
 import "./plugins";
 
 ChartJS.register(

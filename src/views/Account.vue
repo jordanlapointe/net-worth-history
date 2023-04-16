@@ -27,7 +27,7 @@
 <script>
 import { get } from "vuex-pathify";
 import { Bar } from "vue-chartjs";
-import AccessibleChart from "@/components/AccessibleChart";
+import AccessibleChart from "@/components/AccessibleChart.vue";
 
 export default {
   name: "Account",

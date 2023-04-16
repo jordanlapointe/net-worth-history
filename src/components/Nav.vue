@@ -47,8 +47,8 @@
 
 <script>
 import { get, sync } from "vuex-pathify";
-import NavAccountList from "@/components/NavAccountList";
-import NavToggle from "@/components/NavToggle";
+import NavAccountList from "@/components/NavAccountList.vue";
+import NavToggle from "@/components/NavToggle.vue";
 
 export default {
   name: "Nav",

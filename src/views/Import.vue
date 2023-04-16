@@ -60,7 +60,7 @@
 import { BIconSlashLg } from "bootstrap-vue";
 import { ValidationObserver, ValidationProvider } from "vee-validate";
 import { call } from "vuex-pathify";
-import ConfirmAction from "@/components/ConfirmAction";
+import ConfirmAction from "@/components/ConfirmAction.vue";
 import database from "@/store/database";
 import {
   validateAccount,
@@ -88,9 +88,9 @@ export default {
     },
   },
   methods: {
-    fetchAccounts: call("accounts/fetchAccounts"),
-    fetchEntries: call("entries/fetchEntries"),
-    fetchProfiles: call("profiles/fetchProfiles"),
+    ...call("accounts", ["fetchAccounts"]),
+    ...call("entries", ["fetchEntries"]),
+    ...call("profiles", ["fetchProfiles"]),
     getValidationState({ dirty, validated, valid = null }) {
       if ((dirty || validated) && !valid) {
         return false;

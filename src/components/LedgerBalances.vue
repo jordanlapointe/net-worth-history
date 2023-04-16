@@ -60,7 +60,7 @@ export default {
   watch: {},
   mounted() {},
   methods: {
-    updateBalances: call("entries/updateBalances"),
+    ...call("entries", ["updateBalances"]),
     handleBlur(balance) {
       const { valid } = this.$refs.validationObserver.flags;
       if (!valid) return;

@@ -18,6 +18,7 @@ const state = {
     secondary: "",
     white: "",
   },
+  isDarkMode: window.matchMedia("(prefers-color-scheme: dark)").matches,
 };
 
 const getters = {
@@ -176,10 +177,15 @@ const mutations = {
       return computedStyle.getPropertyValue(name);
     };
     const colorNames = Object.keys(state.colors);
-    state.colors = colorNames.reduce((accumulator, name) => {
+    const colorsByName = colorNames.reduce((accumulator, name) => {
       accumulator[name] = getCssVar(`--${name}`);
       return accumulator;
     }, {});
+    const isDarkMode = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+    state.colors = colorsByName;
+    state.isDarkMode = isDarkMode;
   },
 };
 

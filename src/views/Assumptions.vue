@@ -81,7 +81,7 @@ export default {
     },
   },
   methods: {
-    updateDefaultProfile: call("profiles/updateDefaultProfile"),
+    ...call("profiles", ["updateDefaultProfile"]),
     async handleSubmit() {
       await this.updateDefaultProfile({
         contribution: valueToNumber(this.contribution),

@@ -1,0 +1,15 @@
+@import url("bootstrap-4-dark/index.css") (prefers-color-scheme: dark);
+@import url("bootstrap/dist/css/bootstrap.css") (prefers-color-scheme: light),
+  (prefers-color-scheme: no-preference);
+@import url("bootstrap-vue/dist/bootstrap-vue.css");
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --black: #fff;
+  }
+}
+@media (prefers-color-scheme: light), (prefers-color-scheme: no-preference) {
+  :root {
+    --black: #000;
+  }
+}

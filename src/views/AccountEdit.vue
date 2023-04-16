@@ -59,7 +59,7 @@
 import { BIconTrash } from "bootstrap-vue";
 import { ValidationObserver } from "vee-validate";
 import { call, get } from "vuex-pathify";
-import ConfirmAction from "@/components/ConfirmAction";
+import ConfirmAction from "@/components/ConfirmAction.vue";
 import FormInput from "@/components/FormInput.vue";
 
 export default {
@@ -96,9 +96,7 @@ export default {
   },
   mounted() {},
   methods: {
-    addAccount: call("accounts/addAccount"),
-    deleteAccount: call("accounts/deleteAccount"),
-    updateAccount: call("accounts/updateAccount"),
+    ...call("accounts", ["addAccount", "deleteAccount", "updateAccount"]),
     async handleDelete() {
       await this.deleteAccount(this.id);
       this.$router.push("/");

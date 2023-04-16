@@ -7,6 +7,7 @@ import AccountEdit from "@/views/AccountEdit.vue";
 import Assumptions from "@/views/Assumptions.vue";
 import Settings from "@/views/Settings.vue";
 import Import from "@/views/Import.vue";
+import "bootstrap-vue/dist/bootstrap-vue.css";
 
 Vue.use(VueRouter);
 
@@ -59,7 +60,6 @@ const routes = [
 
 const router = new VueRouter({
   mode: "hash",
-  base: process.env.BASE_URL,
   routes,
 });
 

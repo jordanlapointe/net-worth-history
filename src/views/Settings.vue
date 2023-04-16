@@ -20,11 +20,7 @@
           <BIconChevronRight aria-hidden="true" shift-h="2" />
         </div>
       </b-list-group-item>
-      <b-list-group-item
-        class="h5 mb-0"
-        :download="dataFilename"
-        :href="dataUri"
-      >
+      <b-list-group-item button class="h5 mb-0" @click="handleExport">
         Export (.json)
       </b-list-group-item>
     </b-list-group>
@@ -33,6 +29,7 @@
 
 <script>
 import { formatISO } from "date-fns";
+import { writeTextFile, BaseDirectory } from "@tauri-apps/api/fs";
 import database from "@/store/database";
 import { BIconChevronRight } from "bootstrap-vue";
 
@@ -41,34 +38,34 @@ export default {
   components: { BIconChevronRight },
   props: {},
   data() {
-    return {
-      dataExport: "",
-      dataFilename: "",
-      dataImport: "",
-      dataUri: "",
-    };
+    return {};
   },
   computed: {},
-  async mounted() {
-    const accounts = await database.accounts.toArray();
-    const balances = await database.balances.toArray();
-    const entries = await database.entries.toArray();
-    const profiles = await database.profiles.toArray();
-    const dataObj = {
-      accounts,
-      balances,
-      entries,
-      profiles,
-    };
-    const date = formatISO(new Date(), {
-      representation: "date",
-    });
-    this.dataExport = JSON.stringify(dataObj);
-    this.dataFilename = `net-worth-export-${date}.json`;
-    this.dataUri =
-      "data:text/json;charset=utf-8," + encodeURIComponent(this.dataExport);
+  methods: {
+    async handleExport() {
+      const accounts = await database.accounts.toArray();
+      const balances = await database.balances.toArray();
+      const entries = await database.entries.toArray();
+      const profiles = await database.profiles.toArray();
+      const dataObj = {
+        accounts,
+        balances,
+        entries,
+        profiles,
+      };
+      const date = formatISO(new Date(), {
+        representation: "date",
+      });
+      const dataExport = JSON.stringify(dataObj);
+      const dataFilename = `net-worth-export-${date}.json`;
+      await writeTextFile(dataFilename, dataExport, {
+        dir: BaseDirectory.Download,
+      });
+      this.$bvToast.toast("Saved to Dowloads folder", {
+        title: "Export",
+      });
+    },
   },
-  methods: {},
 };
 </script>
 

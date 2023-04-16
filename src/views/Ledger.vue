@@ -65,11 +65,11 @@
 import { BIconThreeDots } from "bootstrap-vue";
 import { ValidationObserver } from "vee-validate";
 import { call, get } from "vuex-pathify";
-import ConfirmAction from "@/components/ConfirmAction";
-import LedgerBalances from "@/components/LedgerBalances";
-import MonthPagination from "@/components/MonthPagination";
-import MonthSelect from "@/components/MonthSelect";
-import LedgerTab from "@/components/LedgerTab";
+import ConfirmAction from "@/components/ConfirmAction.vue";
+import LedgerBalances from "@/components/LedgerBalances.vue";
+import MonthPagination from "@/components/MonthPagination.vue";
+import MonthSelect from "@/components/MonthSelect.vue";
+import LedgerTab from "@/components/LedgerTab.vue";
 import { valueToDollarsFormatted, valueToNumber } from "@/utilities/currency";
 
 export default {
@@ -125,9 +125,7 @@ export default {
     this.setInitialValues();
   },
   methods: {
-    createEntry: call("entries/createEntry"),
-    deleteEntry: call("entries/deleteEntry"),
-    updateBalances: call("entries/updateBalances"),
+    ...call("entries", ["createEntry", "deleteEntry", "updateBalances"]),
     handleAddEntry() {
       this.createEntry(this.activeMonth);
     },
