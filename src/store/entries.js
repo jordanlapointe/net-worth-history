@@ -4,12 +4,9 @@ import { addMonthsIso } from "@/utilities/dates";
 import { validateBalance, validateDate } from "@/utilities/validation";
 import database from "./database";
 
-const ACCOUNT_TYPE_ASSET = "ASSET";
-const ACCOUNT_TYPE_LIABILITY = "LIABILITY";
-
 const accountTypeMap = {
-  [ACCOUNT_TYPE_ASSET]: "assets",
-  [ACCOUNT_TYPE_LIABILITY]: "liabilities",
+  ASSET: "assets",
+  LIABILITY: "liabilities",
 };
 
 const state = {
@@ -95,14 +92,15 @@ const getters = {
     };
     if (!profile) return initialValue;
     const { contribution, growthLow, growthHigh } = profile;
-    const monthlyGrowthLow = growthLow / 100 / 12;
-    const monthlyGrowthHigh = growthHigh / 100 / 12;
+    const contributionMonthly = contribution / 12;
+    const monthlyGrowthLow = 1 + growthLow / 100 / 12;
+    const monthlyGrowthHigh = 1 + growthHigh / 100 / 12;
     return Array.from({ length: 120 }, (_, i) => i + 1).reduce(
       (accumulator, _, index) => {
         const valueLow =
-          accumulator.low[index] * (1 + monthlyGrowthLow) + contribution;
+          accumulator.low[index] * monthlyGrowthLow + contributionMonthly;
         const valueHigh =
-          accumulator.high[index] * (1 + monthlyGrowthHigh) + contribution;
+          accumulator.high[index] * monthlyGrowthHigh + contributionMonthly;
         const valueMiddle = (valueLow + valueHigh) / 2;
         accumulator.low.push(valueLow);
         accumulator.middle.push(valueMiddle);

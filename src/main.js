@@ -35,12 +35,8 @@ ChartJS.register(
 
 Vue.config.productionTip = false;
 
-Vue.filter("currency", function (value) {
-  return valueToDollarsFormatted(value);
-});
-Vue.filter("currencyShort", function (value) {
-  return valueToDollarsAbbreviated(value);
-});
+Vue.filter("currency", valueToDollarsFormatted);
+Vue.filter("currencyShort", valueToDollarsAbbreviated);
 
 Vue.use(BootstrapVue, {
   BCard: {
