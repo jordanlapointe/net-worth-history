@@ -157,8 +157,8 @@ const getters = {
       plugins: {
         tooltip: {
           callbacks: {
-            label({ dataset, formattedValue }) {
-              return `${dataset.id} $${formattedValue}`;
+            label({ dataset, raw }) {
+              return `${dataset.id} $${valueToDollarsFormatted(raw)}`;
             },
           },
         },
