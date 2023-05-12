@@ -1,4 +1,4 @@
-import { format, parseISO } from "date-fns";
+import { format, getMonth, parseISO } from "date-fns";
 import { enUS } from "date-fns/locale";
 import merge from "lodash/merge";
 import { make } from "vuex-pathify";
@@ -95,24 +95,25 @@ const getters = {
       scales: {
         x: {
           afterFit: function (scaleInstance) {
-            scaleInstance.height = 80;
+            scaleInstance.height = 48;
           },
           border: {
             color: colors.secondary,
           },
-          grid: {
-            lineWidth: 0,
-          },
-          offset: true,
           ticks: {
-            callback(value) {
+            callback(value, index) {
               const label = this.getLabelForValue(value);
-              return format(parseISO(label), "LLL yyyy");
+              const date = parseISO(label);
+              const isFirstLabel = index === 0;
+              const isFirstOfYear = getMonth(date) === 0;
+              const showLabel = isFirstLabel || isFirstOfYear;
+              return showLabel ? format(date, "yyyy") : undefined;
             },
             color: colors.black,
             font: {
               size: 14,
             },
+            padding: 0,
           },
         },
         y: {
