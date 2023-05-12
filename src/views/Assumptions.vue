@@ -1,7 +1,6 @@
 <template>
   <b-form class="pt-3" @submit.stop.prevent="handleSubmit">
-    <b-link class="h5" to="./">Settings</b-link>
-    <BIconSlashLg rotate="-20" variant="secondary" />
+    <b-link class="h6" to="./">Settings</b-link>
     <h1 class="h3 mb-3">Forecast Assumptions</h1>
     <b-card style="width: 420px">
       <FormInput

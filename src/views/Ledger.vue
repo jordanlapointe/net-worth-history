@@ -7,7 +7,7 @@
         <MonthSelect v-model="activeMonth" class="ml-2" />
         <ConfirmAction
           v-slot="{ onConfirm }"
-          class="ml-auto"
+          class="ml-5"
           ok-title="Delete Entry"
           ok-variant="danger"
         >
@@ -16,7 +16,7 @@
             size="sm"
             toggle-class="text-decoration-none"
             no-caret
-            right
+            left
             variant="outline-secondary"
           >
             <template #button-content>

@@ -119,7 +119,7 @@ export default {
 
 <style scoped>
 .overlay {
-  bottom: 80px; /* From chartOptions.scales.x.afterFit */
+  bottom: 24px; /* From chartOptions.scales.x.afterFit */
   display: flex;
   left: 60px; /* From chartOptions.scales.y.afterFit */
   position: absolute;

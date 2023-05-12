@@ -2,9 +2,9 @@
   <div
     class="border-right"
     :class="showBorderEffect ? 'border-dark' : 'border-light'"
-    :style="collapsed ? '' : 'width: 20vw'"
+    :style="collapsed ? '' : 'min-width: 220px; width: 22vw;'"
   >
-    <div class="bg-light d-flex mb-1 px-3 py-2 sticky-top">
+    <div class="bg-light d-flex mb-1 pl-3 pr-1 py-2 sticky-top">
       <NavToggle
         v-model="collapsed"
         @blur="showBorderEffect = false"

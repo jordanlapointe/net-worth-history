@@ -9,8 +9,7 @@
         class="pt-3"
         @submit.stop.prevent="handleSubmit(() => onConfirm(handleImport))"
       >
-        <b-link class="h5" to="./">Settings</b-link>
-        <BIconSlashLg rotate="-20" variant="secondary" />
+        <b-link class="h6" to="./">Settings</b-link>
         <h1 class="h3 mb-3">Import</h1>
         <b-card style="width: fit-content">
           <b-form-group

@@ -2,7 +2,7 @@
   <div class="py-2">
     <div class="align-items-baseline d-flex mb-4">
       <h1 class="h2 mb-0">Net Worth</h1>
-      <p class="h4 ml-auto text-muted" data-testid="NetWorth-net-total">
+      <p class="h4 ml-4 text-muted" data-testid="NetWorth-net-total">
         ${{ mostRecentNetTotal | currency }}
       </p>
     </div>
@@ -22,7 +22,7 @@
       :options="chartOptionsProjection"
       style="height: 75vh"
     />
-    <div class="text-center">
+    <div class="mb-3 text-center">
       <b-tabs
         v-model="activeTab"
         class="border border-primary d-inline-block rounded-lg"
@@ -32,26 +32,25 @@
         <b-tab title-link-class="px-4" title="History" />
         <b-tab title-link-class="px-4" title="Future" />
       </b-tabs>
-      <hr />
     </div>
     <div class="align-items-baseline d-flex mb-2">
       <h2 class="h3 mb-1">Assets</h2>
-      <p class="h5 ml-auto mb-0 text-muted" data-testid="NetWorth-assets-total">
+      <p class="h5 ml-3 mb-0 text-muted" data-testid="NetWorth-assets-total">
         ${{ mostRecentAssetsTotal | currency }}
       </p>
     </div>
     <AccessibleChart
       id="NetWorth-assetsChart"
-      class="mb-3"
+      class="mb-4"
       :component="Bar"
       :data="dataAssets"
       :options="chartOptions"
-      style="height: 40vh"
+      style="height: 36vh"
     />
     <div class="align-items-baseline d-flex mb-2">
       <h2 class="h3 mb-1">Liabilities</h2>
       <p
-        class="h5 ml-auto mb-0 text-muted"
+        class="h5 ml-3 mb-0 text-muted"
         data-testid="NetWorth-liabilities-total"
       >
         ${{ mostRecentLiabilitiesTotal | currency }}
@@ -62,7 +61,7 @@
       :component="Bar"
       :data="dataLiabilities"
       :options="chartOptions"
-      style="height: 40vh"
+      style="height: 36vh"
     />
   </div>
 </template>
@@ -108,21 +107,26 @@ export default {
         labels: this.futureDates,
         datasets: [
           {
-            data: this.futureTotals.middle,
-            borderColor: this.colors.white,
-            id: "Avg",
+            backgroundColor: this.colors.black,
+            data: this.futureTotals.high,
+            fill: "+1",
+            id: "High",
+            order: 2,
           },
           {
+            backgroundColor: this.colors.black,
+            borderColor: this.colors.white,
+            data: this.futureTotals.middle,
+            fill: "+1",
+            id: "Avg",
+            order: 1,
+          },
+          {
+            backgroundColor: this.colors.secondary,
             data: this.futureTotals.low,
             fill: "origin",
-            backgroundColor: this.colors.secondary,
             id: "Low",
-          },
-          {
-            data: this.futureTotals.high,
-            fill: "-1",
-            backgroundColor: this.colors.black,
-            id: "High",
+            order: 0,
           },
         ],
       };

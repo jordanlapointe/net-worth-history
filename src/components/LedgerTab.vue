@@ -1,8 +1,8 @@
 <template>
   <b-tab :active="active">
     <template #title>
-      <p class="h6 mb-0">{{ title }}</p>
-      <span v-if="total" class="d-block small">${{ total }}</span>
+      <span class="font-weight-bold mb-0">{{ title }}</span>
+      <span v-if="total" class="d-block">${{ total }}</span>
     </template>
     <slot></slot>
   </b-tab>

@@ -30,17 +30,12 @@
           </div>
         </b-nav-item>
       </template>
-      <p v-else-if="accountFilter" class="mb-0 px-3 text-muted">
-        No {{ categoryPlural }} match the filter “{{ accountFilter }}”
+      <p v-else-if="accountFilter" class="mb-0 pb-1 px-3 text-muted">
+        No matches for “{{ accountFilter }}”
       </p>
       <b-nav-item :to="`/accounts/add/${categoryName}`">
         Add <span class="text-capitalize">{{ categoryName }}</span>
-        <BIconPlus
-          aria-hidden="true"
-          class="float-right"
-          scale="1.4"
-          shift-v="-1"
-        />
+        <BIconPlus aria-hidden="true" class="ml-3" scale="1.4" shift-v="-1" />
       </b-nav-item>
     </b-nav>
   </div>
