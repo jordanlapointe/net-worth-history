@@ -10,9 +10,19 @@
           </b-link>
         </p>
       </div>
-      <p class="h5 ml-auto text-muted">
-        ${{ mostRecentBalancesByAccountId[account.id] | currency }}
-      </p>
+      <div class="ml-auto text-right">
+        <p class="h5 mb-1 text-muted">
+          ${{ mostRecentBalancesByAccountId[account.id] | currency }}
+        </p>
+        <b-link
+          :to="{
+            name: 'ledger',
+            query: { accountId: account.id, accountType: account.type },
+          }"
+        >
+          Ledger<BIconChevronRight scale="0.8" shift-h="2" shift-v="-1.5" />
+        </b-link>
+      </div>
     </div>
     <AccessibleChart
       id="Account-chart"
@@ -25,13 +35,14 @@
 </template>
 
 <script>
+import { BIconChevronRight } from "bootstrap-vue";
 import { get } from "vuex-pathify";
 import { Bar } from "vue-chartjs";
 import AccessibleChart from "@/components/AccessibleChart.vue";
 
 export default {
   name: "Account",
-  components: { AccessibleChart },
+  components: { AccessibleChart, BIconChevronRight },
   props: {},
   data() {
     return { Bar };

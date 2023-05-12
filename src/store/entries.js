@@ -148,16 +148,29 @@ const getters = {
 const mutations = {
   ...make.mutations(state),
   setEntries(state, entries) {
-    state.data = entries.map((entries) => ({
-      ...entries,
-      balances: entries.balances.map((balance) => {
-        return {
-          ...balance,
-          value: valueToNumber(balance.value),
-          valueFormatted: valueToDollarsFormatted(balance.value),
-        };
-      }),
-    }));
+    state.data = entries.map((entry, index) => {
+      const previousEntry = entries[index - 1];
+      return {
+        ...entry,
+        balances: entry.balances.map((balance) => {
+          const previousBalance = previousEntry?.balances.find(
+            ({ account }) => account.id === balance.account.id
+          );
+          const previousValue = previousBalance?.value;
+          return {
+            ...balance,
+            value: valueToNumber(balance.value),
+            valueFormatted: valueToDollarsFormatted(balance.value),
+            valuePrevious: previousBalance
+              ? valueToNumber(previousValue)
+              : undefined,
+            valuePreviousFormatted: previousBalance
+              ? valueToDollarsFormatted(previousValue)
+              : undefined,
+          };
+        }),
+      };
+    });
     if (!state.initialLoad) {
       state.initialLoad = true;
     }

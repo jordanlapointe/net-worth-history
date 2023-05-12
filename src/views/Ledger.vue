@@ -31,17 +31,19 @@
       </div>
       <b-tabs
         v-if="entry"
+        v-model="activeTab"
         nav-wrapper-class="nav-container border border-primary rounded-lg mb-2"
         justified
+        lazy
         no-fade
         pills
         size="lg"
       >
-        <LedgerTab active title="Assets" :total="assetsTotal">
-          <LedgerBalances :balances="assets" />
+        <LedgerTab title="Assets" :total="assetsTotal">
+          <LedgerBalanceList :balances="assets" />
         </LedgerTab>
         <LedgerTab title="Liabilities" :total="liabilitiesTotal">
-          <LedgerBalances :balances="liabilities" />
+          <LedgerBalanceList :balances="liabilities" />
         </LedgerTab>
       </b-tabs>
       <b-card v-else class="py-5 text-center">
@@ -66,18 +68,18 @@ import { BIconThreeDots } from "bootstrap-vue";
 import { ValidationObserver } from "vee-validate";
 import { call, get } from "vuex-pathify";
 import ConfirmAction from "@/components/ConfirmAction.vue";
-import LedgerBalances from "@/components/LedgerBalances.vue";
+import LedgerBalanceList from "@/components/LedgerBalanceList.vue";
 import MonthPagination from "@/components/MonthPagination.vue";
 import MonthSelect from "@/components/MonthSelect.vue";
 import LedgerTab from "@/components/LedgerTab.vue";
-import { valueToDollarsFormatted, valueToNumber } from "@/utilities/currency";
+import { valueToDollarsAbbreviated, valueToNumber } from "@/utilities/currency";
 
 export default {
   name: "Ledger",
   components: {
     BIconThreeDots,
     ConfirmAction,
-    LedgerBalances,
+    LedgerBalanceList,
     MonthPagination,
     MonthSelect,
     LedgerTab,
@@ -85,6 +87,7 @@ export default {
   },
   data() {
     return {
+      activeTab: 0,
       assets: [],
       assetsTotal: undefined,
       hasChanges: false,
@@ -122,6 +125,7 @@ export default {
     },
   },
   mounted() {
+    this.setActiveTab();
     this.setInitialValues();
   },
   methods: {
@@ -140,6 +144,14 @@ export default {
         value: valueToNumber(balance.valueFormatted),
       }));
       this.updateBalances(balancesFormatted);
+    },
+    setActiveTab() {
+      const targetType = this.$route.query.accountType;
+      const isLiabilityTargeted = targetType === "LIABILITY";
+      if (!isLiabilityTargeted) return;
+      this.$nextTick(() => {
+        this.activeTab = 1;
+      });
     },
     setInitialValues() {
       if (this.entry) {
