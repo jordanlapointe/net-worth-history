@@ -16,6 +16,7 @@
         :data-testid="`${id}-button-${index}`"
         variant="outline-secondary"
         @blur="handleBlur(index)"
+        @click="handleClick"
         @mouseover="handleHover(index)"
         @focus="handleFocus(index)"
         @keydown.left="handleArrowLeft(index, $event)"
@@ -85,6 +86,9 @@ export default {
         if (this.containsFocus()) return;
         this.clearActive();
       });
+    },
+    handleClick({ target }) {
+      target.focus();
     },
     handleFocus(index) {
       this.setActive(index);
