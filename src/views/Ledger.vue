@@ -158,9 +158,9 @@ export default {
         const clone = structuredClone(this.entry);
         const { assets, assetsTotal, liabilities, liabilitiesTotal } = clone;
         this.assets = Object.values(assets);
-        this.assetsTotal = valueToDollarsFormatted(assetsTotal);
+        this.assetsTotal = valueToDollarsAbbreviated(assetsTotal);
         this.liabilities = Object.values(liabilities);
-        this.liabilitiesTotal = valueToDollarsFormatted(liabilitiesTotal);
+        this.liabilitiesTotal = valueToDollarsAbbreviated(liabilitiesTotal);
       } else {
         this.assets = [];
         this.liabilities = [];
