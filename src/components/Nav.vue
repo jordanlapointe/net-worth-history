@@ -15,8 +15,11 @@
       <b-input-group v-if="!collapsed" class="ml-3" size="sm">
         <b-form-input
           v-model="accountFilter"
+          autocomplete="off"
           class="px-3"
           placeholder="Filter Accounts"
+          spellcheck="false"
+          type="search"
         />
       </b-input-group>
     </div>
