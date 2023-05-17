@@ -127,14 +127,35 @@ export default {
   mounted() {
     this.setActiveTab();
     this.setInitialValues();
+    window.addEventListener("keydown", this.handleKeydown);
+  },
+  beforeUnmount() {
+    window.removeEventListener("keydown", this.handleKeydown);
   },
   methods: {
     ...call("entries", ["createEntry", "deleteEntry", "updateBalances"]),
+    ...call("history", ["redo", "undo"]),
     handleAddEntry() {
       this.createEntry(this.activeMonth);
     },
     handleDelete() {
       this.deleteEntry(this.activeMonth);
+    },
+    handleKeydown(event) {
+      const { ctrlKey, key, metaKey, shiftKey } = event;
+      const isInputFocused = event.target.tagName === "INPUT";
+      const isUndoShortcut = key === "z" && (ctrlKey || metaKey);
+      const isRedoShortcut = isUndoShortcut && shiftKey;
+      if (isInputFocused) {
+        return;
+      }
+      if (isUndoShortcut) {
+        this.undo();
+      }
+      if (isRedoShortcut) {
+        this.redo();
+      }
+      event.preventDefault();
     },
     handleSave() {
       const balances = [].concat(this.assets, this.liabilities);

@@ -196,7 +196,9 @@ const actions = {
   },
   async deleteEntry({ dispatch }, date) {
     const isValid = validateDate(date);
-    if (!isValid) return;
+    if (!isValid) {
+      return;
+    }
     const entry = await database.entries.get(date);
     await database.balances.bulkDelete(entry.balances);
     await database.entries.delete(date);
@@ -206,13 +208,22 @@ const actions = {
     const entriesData = await database.entries.populate().toArray();
     commit("setEntries", entriesData);
   },
-  async updateBalances({ dispatch }, balances) {
-    const isValid = balances.every((balance) => {
-      return validateBalance(balance);
-    });
-    if (!isValid) return;
-    await database.balances.bulkPut(balances);
-    await dispatch("fetchEntries");
+  async updateBalances({ dispatch }, newBalances) {
+    const isValid = newBalances.every(validateBalance);
+    if (!isValid) {
+      return;
+    }
+    const ids = newBalances.map(({ id }) => id);
+    const oldBalances = await database.balances.bulkGet(ids);
+    const change = {
+      async handler(newValue) {
+        await database.balances.bulkPut(newValue);
+        await dispatch("fetchEntries");
+      },
+      from: oldBalances,
+      to: newBalances,
+    };
+    dispatch("history/rememberChange", change, { root: true });
   },
 };
 
